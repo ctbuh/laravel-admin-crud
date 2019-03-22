@@ -3,7 +3,7 @@
     <div class="col-sm-10">
 
         <textarea name="{{ $field->name }}" rows="{{ $field->getAutoRowCount() }}"
-                  class="form-control {{ $field->classes() }}">{{ $field->value }}</textarea>
+                  class="form-control {{ $field->classes() }}" {!! $field->attr() !!}>{{ $field->value }}</textarea>
 
         @if($field->help)
             <p class="help-block">{!! $field->help !!}</p>

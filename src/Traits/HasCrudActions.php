@@ -75,6 +75,7 @@ trait HasCrudActions
 
         $prefill = array_merge($request_data, $old_input);
 
+        // TODO: have to make sure whatever is passed through is fillable!
         $model->fill($prefill);
 
         $form->fields()->each(function (Field $field) use (&$model) {

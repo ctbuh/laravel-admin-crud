@@ -4,6 +4,9 @@ namespace ctbuh\Admin\Fields;
 
 use ctbuh\Admin\Field;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOneOrMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\Relation;
 
 /**
  * Class HasMany
@@ -15,7 +18,11 @@ class HasMany extends Field
 {
     protected $view = 'has_many';
 
-    // custom
+    /**
+     * @var HasOneOrMany
+     */
+    protected $relation; // TODO: let's not do this maybe?
+
     protected $related_resource;
     protected $related_fields;
 
@@ -36,7 +43,8 @@ class HasMany extends Field
 
     public function onLoad()
     {
-        $this->related_resource = $this->resource->{$this->getRelationshipName()}()->getRelated();
+        $this->relation = $this->resource->{$this->getRelationshipName()}();
+        $this->related_resource = $this->relation->getRelated();
     }
 
     private function init()
@@ -102,9 +110,17 @@ class HasMany extends Field
 
         $base_uri = $resource->getActionUri('create');
 
-        return $base_uri . '?' . http_build_query(array(
-                'resource_type' => class_basename($this->resource),
-                'resource_id' => data_get($this->resource, 'id')
-            ));
+        $fk_name = $this->relation->getForeignKeyName();
+
+        $params = array(
+            'resource_type' => class_basename($this->resource),
+            $fk_name => data_get($this->resource, 'id')
+        );
+
+        if ($this->relation instanceof MorphMany) {
+            $params[$this->relation->getMorphType()] = $this->relation->getMorphClass();
+        }
+
+        return $base_uri . '?' . http_build_query($params);
     }
 }

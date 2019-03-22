@@ -16,7 +16,7 @@
                         <i class="fas fa-search"></i> Search
                     </span>
                 </div>
-                
+
             </div>
 
             <input type="search" class="form-control" placeholder="Filter table... " title="Search">

@@ -1,8 +1,12 @@
 <div class="form-group">
-    <label for="{{ $field->name }}" class="col-sm-2 control-label text-warning">{{ $field->label }}</label>
+
+    <label for="{{ $field->name }}" class="col-sm-2 control-label text-info">
+        <i class="fa fa-list-alt"></i> {{ $field->label }}
+    </label>
+
     <div class="col-sm-10">
 
-        <select name="{{ $field->name }}" class="form-control">
+        <select name="{{ $field->name }}" class="form-control" {!! $field->attr() !!}>
 
             @if($field->placeholder)
                 <option value="">{{ $field->placeholder }}</option>

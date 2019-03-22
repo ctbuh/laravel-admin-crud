@@ -9,7 +9,7 @@ https://symfony.com/doc/current/_images/form/form-field-parts.svg
             <span class="font-weight-bold text-danger">*</span>
         @endif
 
-        {!! $field->label !!}</label>
+        {!! $field->label !!}:</label>
 
     <div class="col-sm-10 col-md-6">
 
