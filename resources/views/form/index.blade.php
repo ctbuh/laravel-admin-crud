@@ -2,7 +2,28 @@
 
 @section('content-fluid')
 
-    <h1 class="mb-5">Index of - {{ $grid->modelLabel() }}</h1>
+    <h1 class="mb-5">{{ $grid->modelLabel() }} List</h1>
+
+
+    <div class="row mt-5 mb-4">
+
+        <div class="col-md-8 col-md-offset-2">
+
+            <div class="input-group mb-3">
+
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <i class="fas fa-search"></i> Search
+                    </span>
+                </div>
+                
+            </div>
+
+            <input type="search" class="form-control" placeholder="Filter table... " title="Search">
+
+        </div>
+
+    </div>
 
     <div class="row mb-4">
         <div class="col-sm-6">
@@ -29,7 +50,7 @@
                 <th>{{ $column->label }}</th>
             @endforeach
 
-            <th width="180">Actions</th>
+            <th width="70">Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -84,6 +105,8 @@
 
     <script>
 
+        var crud_table;
+
         var sortable = {{ $grid->isSortable() ? 'true' : 'false' }};
 
         var sortable_url = "ajaxSortable";
@@ -108,6 +131,15 @@
                     'header': true,
                     'headerOffset': 50
                 },
+
+            });
+
+            crud_table = table;
+
+            $("[type=search]").keyup(function () {
+
+                var val = $(this).val();
+                crud_table.search(val).draw();
 
             });
 

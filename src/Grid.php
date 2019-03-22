@@ -9,7 +9,7 @@ class Grid extends CrudView
     // templates
     // https://api.cakephp.org/3.4/source-class-Cake.View.Helper.FormHelper.html#89
 
-    public $can_delete_from_grid = true;
+    public $can_delete_from_grid = false;
 
     protected $templates = array(
         'formStart' => '<form{{attrs}}>'
