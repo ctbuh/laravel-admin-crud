@@ -12,5 +12,7 @@
             "ctbuh\\Admin\\": "src"
         }
     },
-    "require": {}
+    "require": {
+        "spatie/eloquent-sortable": "^3.4"
+    }
 }

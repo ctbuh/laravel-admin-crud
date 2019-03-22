@@ -22,16 +22,18 @@ class CrudServiceProvider extends ServiceProvider
             Route::resource($name, $controller);
         });
 
+        /*
         $this->publishes([
             __DIR__ . '/../config/crzud.php' => config_path('crud.php'),
         ], 'nova-config');
+        */
 
         // use the vendor configuration file as fallback
         $this->mergeConfigFrom(
-            __DIR__ . '/config/crud.php',
+            __DIR__ . '/../config/crud.php',
             'crud'
         );
 
-        $this->loadViewsFrom(__DIR__ . '/resources/views', 'crud');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'crud');
     }
 }
