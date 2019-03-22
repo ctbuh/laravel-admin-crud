@@ -10,6 +10,7 @@ class Grid extends FormBase
     // https://api.cakephp.org/3.4/source-class-Cake.View.Helper.FormHelper.html#89
 
     public $can_delete_from_grid = false;
+    public $row_attributes = array();
 
     protected $templates = array(
         'formStart' => '<form{{attrs}}>'
@@ -20,16 +21,14 @@ class Grid extends FormBase
         return 'gdf';
     }
 
+    /**
+     * @return Field[]|\Illuminate\Support\Collection
+     */
     public function columns()
     {
         return $this->fields()->filter(function (Field $field) {
             return $field->shouldShow('index');
         });
-    }
-
-    public function rowAttributes()
-    {
-
     }
 
     public function beforeGridText($text)
@@ -56,10 +55,39 @@ class Grid extends FormBase
         return $this;
     }
 
-    // TODO: eagerloadin with()->data();
     public function data()
     {
         return $this->query->get();
+    }
+
+    /**
+     * @return Field[][]
+     */
+    public function newData()
+    {
+        $data = $this->data();
+
+        $rows = array();
+
+        foreach ($data as $row) {
+
+            $cells = array();
+
+            // actually fields!
+            foreach ($this->columns() as $column) {
+                $column->setValue($row);
+
+                $cells[] = $column;
+            }
+
+            $rows[] = $cells;
+        }
+
+        dump($rows);
+        exit;
+
+
+        return $rows;
     }
 
     // AJAX -> datatables

@@ -219,7 +219,7 @@ abstract class Field
      * @param callable|string $format_options
      * @return mixed
      */
-    public static function formatValueFromResource($resource, $format_options)
+    public static function getValueFromResource($resource, $format_options)
     {
         if ($format_options instanceof Closure) {
             return call_user_func($format_options->bindTo(null), $resource);
@@ -265,7 +265,7 @@ abstract class Field
         $this->resource = $resource;
 
         // TODO: is this even needed?
-        $this->value = static::formatValueFromResource($resource, !empty($this->value_set_callback) ? $this->value_set_callback : $this->name);
+        $this->value = static::getValueFromResource($resource, !empty($this->value_set_callback) ? $this->value_set_callback : $this->name);
         $this->onLoad();
 
         return $this;
@@ -308,7 +308,7 @@ abstract class Field
             $formatter = $this->value_set_callback;
         }
 
-        $val = $this::formatValueFromResource($this->resource, $formatter);
+        $val = $this::getValueFromResource($this->resource, $formatter);
 
         return $as_string ? (is_array($val) ? collect($val) : $val) : $val;
     }

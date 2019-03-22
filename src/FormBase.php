@@ -35,7 +35,7 @@ abstract class FormBase implements Arrayable
      *
      * @var \Illuminate\Database\Eloquent\Builder
      */
-    protected $query;
+    public $query;
 
     /**
      * TODO: rename this to context
@@ -105,8 +105,12 @@ abstract class FormBase implements Arrayable
         }
     }
 
-    public static function load($entity, $query_callback, $data_callback)
+    public static function load($source, $query_callback, $data_callback)
     {
+
+    }
+
+    public function resource(){
 
     }
 
