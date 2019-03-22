@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\View;
 use Validator;
 
 // implements ArrayAccess - Does component specified by name exists?
-class Form extends CrudView
+class Form extends FormBase
 {
     use HasHtmlAttributesTrait;
 

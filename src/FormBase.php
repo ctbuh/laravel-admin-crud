@@ -7,7 +7,7 @@ use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Eloquent\Model;
 
 // CrudContext
-abstract class CrudView implements Arrayable
+abstract class FormBase implements Arrayable
 {
     // must be class resolvable
     protected $resource;
@@ -52,7 +52,7 @@ abstract class CrudView implements Arrayable
      * @param $resource
      * @param null $id
      * @param null $context
-     * @return CrudView|Form|Grid
+     * @return FormBase|Form|Grid
      */
     public static function fromResource($resource, $id = null, $context = null)
     {

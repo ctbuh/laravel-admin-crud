@@ -4,7 +4,7 @@ namespace ctbuh\Admin;
 
 // Grid::registerView('name', $filter_builder, $filter_data);
 // implements DataProvider
-class Grid extends CrudView
+class Grid extends FormBase
 {
     // templates
     // https://api.cakephp.org/3.4/source-class-Cake.View.Helper.FormHelper.html#89

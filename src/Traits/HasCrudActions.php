@@ -37,6 +37,22 @@ trait HasCrudActions
         return $grid;
     }
 
+    /**
+     * TODO: have to make sure whatever is passed through is fillable!
+     * session() Old input combined with request() query data
+     * @return array
+     */
+    protected function getOldInput()
+    {
+        // previous data!
+        $request_data = request()->all();
+        $old_input = session()->getOldInput();
+
+        $prefill = array_merge($request_data, $old_input);
+
+        return $prefill;
+    }
+
     protected function index()
     {
         $grid = $this->setupGrid();
@@ -65,18 +81,9 @@ trait HasCrudActions
         $form = Form::create($this->resource);
         $model = $form->model;
 
-        if ($model->canAction('create') == false) {
-            die('action not allowed');
-        }
+        $model->hasAccessOrFail('create');
 
-        // previous data!
-        $request_data = request()->all();
-        $old_input = session()->getOldInput();
-
-        $prefill = array_merge($request_data, $old_input);
-
-        // TODO: have to make sure whatever is passed through is fillable!
-        $model->fill($prefill);
+        $model->fill($this->getOldInput());
 
         $form->fields()->each(function (Field $field) use (&$model) {
             $field->setValue($model);
@@ -121,18 +128,15 @@ trait HasCrudActions
         return view('crud::form.show', compact('form'));
     }
 
+
     public function edit($id)
     {
         $form = Form::edit($this->resource, $id);
         $model = $form->model;
 
-        if ($model->canAction('edit') == false) {
-            die('cannot edit');
-        }
+        $model->hasAccessOrFail('edit');
 
-        // previous data!
-        $old_input = session()->getOldInput();
-        $model->fill($old_input);
+        $model->fill($this->getOldInput());
 
         $form->fields()->each(function (Field $field) use (&$model) {
             $field->setValue($model);
