@@ -1,0 +1,16 @@
+{
+    "name": "ctbuh/laravel-crud-admin",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Athlon1600",
+            "email": "Athlon2400@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "ctbuh\\Admin\\": "src"
+        }
+    },
+    "require": {}
+}
