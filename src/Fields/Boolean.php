@@ -3,7 +3,6 @@
 namespace ctbuh\Admin\Fields;
 
 use ctbuh\Admin\Field;
-use Illuminate\Support\Collection;
 
 class Boolean extends Field
 {
@@ -13,9 +12,8 @@ class Boolean extends Field
     {
         parent::__construct($name, $label);
 
-        $this->formatGridValueUsing(function ($value) {
-            return $value ? '<i class="fas fa-check"></i>' : '';
+        $this->formatGridValueUsing(function ($resource) use (&$name) {
+            return $resource->{$name} ? '<i class="fas fa-check"></i>' : '';
         });
     }
-
 }

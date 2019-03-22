@@ -128,7 +128,6 @@ trait HasCrudActions
         return view('crud::form.show', compact('form'));
     }
 
-
     public function edit($id)
     {
         $form = Form::edit($this->resource, $id);

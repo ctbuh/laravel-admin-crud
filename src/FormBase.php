@@ -6,7 +6,6 @@ use App\GenericModel;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Eloquent\Model;
 
-// CrudContext
 abstract class FormBase implements Arrayable
 {
     // must be class resolvable
@@ -36,7 +35,7 @@ abstract class FormBase implements Arrayable
      *
      * @var \Illuminate\Database\Eloquent\Builder
      */
-    public $query;
+    protected $query;
 
     /**
      * TODO: rename this to context
@@ -104,6 +103,11 @@ abstract class FormBase implements Arrayable
             $this->model = (new $this->resource);
             $this->query = $this->query();
         }
+    }
+
+    public static function load($entity, $query_callback, $data_callback)
+    {
+
     }
 
     /**
