@@ -54,8 +54,6 @@
         </tr>
         </thead>
         <tbody>
-        
-        {{ $grid->newData() }}
 
         @foreach($grid->data() as $model)
 

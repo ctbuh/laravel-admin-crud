@@ -16,9 +16,11 @@ class CrudServiceProvider extends ServiceProvider
     public function boot()
     {
         Route::macro('crud', function ($name, $controller) {
+
             Route::post("{$name}/ajaxSortable", "{$controller}@ajaxSortable");
             Route::post("{$name}/restore", "{$controller}@restore");
             Route::get("{$name}/trashed", "{$controller}@indexTrashed");
+
             Route::resource($name, $controller);
         });
 

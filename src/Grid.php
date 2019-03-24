@@ -83,10 +83,6 @@ class Grid extends FormBase
             $rows[] = $cells;
         }
 
-        dump($rows);
-        exit;
-
-
         return $rows;
     }
 
